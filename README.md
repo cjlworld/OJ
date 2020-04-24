@@ -12,4 +12,7 @@ poj#(nums)                  --->     from poj
 bzoj#(nums)                 --->     from bzoj            
 hdu#(nums)                  --->     from hdu                 
 Vijos(nums)                 --->     from vijos
+UVA(nums)                   --->     from UVA
+CF(nums)+{A,B,C,D,E..}      --->     from Code forces  
+SP(nums)                    --->     from SPOJ
 ```
