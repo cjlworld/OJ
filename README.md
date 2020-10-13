@@ -1,7 +1,6 @@
 # CJL的代码仓库
 
-my codes                      
-from online Judges                           
+my codes from online Judges                           
 
 ### names        
 ``` 
