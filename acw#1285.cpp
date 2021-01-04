@@ -16,7 +16,7 @@ using namespace std;
 typedef long long LL;
 typedef unsigned long long ULL;
 
-const int N=2e6+5,M=2e6+5;
+const int N=1e6+5;
 
 int one[N],idx;
 int ver[N],Next[N];
@@ -28,10 +28,10 @@ inline void AddEdge(int a,int b)
 int ch[N][26],fail[N],match[N],cnt[N];
 int tot;
 
-void insert(char a[],int id)
+void insert(vector<char> &a,int id)
 {
 	int now=0;
-	for(int i=1;a[i];i++) {
+	for(int i=0;i<(int)a.size();i++) {
 		int &s=ch[now][a[i]-'a'];
 		if(!s) s=++tot;
 		now=s;
@@ -57,10 +57,10 @@ void ACbuild()
 	}
 }
 
-void query(char a[])
+void query(vector<char> &a)
 {
 	int now=0;
-	for(int i=1;a[i];i++) {
+	for(int i=0;i<(int)a.size();i++) {
 		int s=ch[now][a[i]-'a'];
 		now=s;
 		cnt[now]++;
@@ -74,31 +74,33 @@ void dp(int x)
 }
 
 int n,m;
-char a[M],b[M];
+char a[N];
+
+vector<char> v[256];
 
 int main()
 {
 //	freopen("1.in","r",stdin);
-	int i;
+	int i,j;
 	
 	scanf("%d",&n);
 	for(i=1;i<=n;i++) {
 		scanf("%s",a+1);
-		insert(a,i);
+		for(j=1;a[j];j++) 
+			v[i].push_back(a[j]);
+		insert(v[i],i);
 	}
 	ACbuild();
 	
-	scanf("%s",b+1);
-	query(b);
+	for(i=1;i<=n;i++) 
+		query(v[i]);
 	
 	memset(one,-1,sizeof one);
 	for(i=1;i<=tot;i++) AddEdge(fail[i],i);
 	dp(0);
 	
-	int ans=0;
 	for(i=1;i<=n;i++) 
-		if(cnt[match[i]])
-			ans++;
-	printf("%d\n",ans);
+		printf("%d\n",cnt[match[i]]);
 	return 0;
 }
+

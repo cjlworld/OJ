@@ -16,7 +16,7 @@ using namespace std;
 typedef long long LL;
 typedef unsigned long long ULL;
 
-const int N=2e6+5,M=2e6+5;
+const int N=8e5+5,M=2e6+5;
 
 int one[N],idx;
 int ver[N],Next[N];
@@ -25,7 +25,8 @@ inline void AddEdge(int a,int b)
 	Next[idx]=one[a],ver[idx]=b,one[a]=idx++;
 }
 
-int ch[N][26],fail[N],match[N],cnt[N];
+int ch[N][26],fail[N],match[N];
+LL cnt[N];
 int tot;
 
 void insert(char a[],int id)
@@ -95,10 +96,8 @@ int main()
 	for(i=1;i<=tot;i++) AddEdge(fail[i],i);
 	dp(0);
 	
-	int ans=0;
 	for(i=1;i<=n;i++) 
-		if(cnt[match[i]])
-			ans++;
-	printf("%d\n",ans);
+		printf("%lld\n",cnt[match[i]]);
 	return 0;
 }
+
