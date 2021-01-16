@@ -32,7 +32,7 @@ struct Node
 }t[N];
 int idx,root;
 
-void maintain(int now) // 维护信息，相当于 pushup 
+void Maintain(int now) // 维护信息，相当于 pushup 
 {
 	t[now].siz=t[t[now].lc].siz+t[t[now].rc].siz+1; // siz
 	t[now].sum=t[t[now].lc].sum+t[t[now].rc].sum+t[now].val; //sum
@@ -63,7 +63,8 @@ int NewNode(int x,int y,int val)
 	t[idx].y=y;
 	t[idx].val=val;
 	t[idx].lc=t[idx].rc=0;
-	maintain(idx);
+	t[idx].judge=(rand()&1);
+	Maintain(idx);
 	return idx;
 }
 
@@ -74,28 +75,13 @@ int build(int l,int r)
 {
 	if(l>r) return 0;
 	int mid=(l+r)>>1;
-	int mx1,mn1,mx2,mn2;
-	mx1=mn1=t[l].x,mx2=mn2=t[l].y;
 	
-	for(int i=l+1;i<=r;i++) {
-		relax(mx1,t[i].x);
-		tense(mn1,t[i].x);
-		relax(mx2,t[i].y);
-		tense(mn2,t[i].y);
-	}
-	
-	if(mx1-mn1>=mx2-mn2) {
-		nth_element(t+l,t+mid,t+r+1,cmpx);
-		t[mid].judge=1;
-	}
-	else {
-		nth_element(t+l,t+mid,t+r+1,cmpy);
-		t[mid].judge=2;
-	}
-	
+	if(rand()&1) 
+		nth_element(t+l,t+mid,t+r+1,cmpx),t[mid].judge=1;
+	else nth_element(t+l,t+mid,t+r+1,cmpy),t[mid].judge=0;
 	t[mid].lc=build(l,mid-1);
 	t[mid].rc=build(mid+1,r);
-	maintain(mid);
+	Maintain(mid);
 	return mid;
 }
 
@@ -115,7 +101,7 @@ void insert(int& now,int id)
 			insert(t[now].lc,id);
 		else insert(t[now].rc,id);
 	}
-	maintain(now);
+	Maintain(now);
 }
 
 int query(int now,int l,int r,int d,int u)
@@ -157,4 +143,3 @@ int main()
 	}
 	return 0;
 }
-
