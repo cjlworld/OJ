@@ -1,8 +1,8 @@
 # CJL的代码仓库
 
-my codes from online Judges                           
+存放在 Online Judge 上做题的代码
 
-### names        
+### names (命名规则)       
 ``` 
 (nums)                      --->     from ybt
 P(nums)                     --->     from luogu
